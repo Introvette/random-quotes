@@ -3,12 +3,31 @@ const quoteText = document.getElementById("quote");
 const authorText = document.getElementById("author");
 const twitterBtn = document.getElementById("twitter");
 const newQuoteBtn = document.getElementById("new-quote");
+const loader = document.getElementById("loader");
 
 let apiQuotes = [];
 // using let because the value will change later when it fetches a quote
 
+// Loading function
+function loading() {
+    loader.hidden = false;
+    // false means dont want it hidden
+    // do opposite for quoteContainer
+    quoteContainer.hidden = true;
+    // when loader is going, we're only gonna see loader and nothing else
+}
+
+// Hide loading
+function complete() {
+    quoteContainer.hidden = false;
+    // want to show container when loading is complete
+    loader.hidden = true;
+    // hide our loader ^^
+}
+
 // Show new quote
 function newQuote() {
+    loading();
 // Pick a random quote from apiQuotes array
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
     // check if author field is blank and replace with 'Uknown'
@@ -24,11 +43,12 @@ function newQuote() {
         quoteText.classList.remove('long-quote');
     }
     quoteText.textContent = quote.text;
-
+    complete();
 }
 
 //  Get quotes from API
 async function getQuotes() {
+    loading();
     const apiUrl = 'https://jacintodesign.github.io/quotes-api/data/quotes.json';
     try {
     const response = await fetch(apiUrl);
