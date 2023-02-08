@@ -24,10 +24,8 @@ function newQuote() {
         quoteText.classList.remove('long-quote');
     }
     quoteText.textContent = quote.text;
-    console.log();
 
 }
-
 
 //  Get quotes from API
 async function getQuotes() {
@@ -43,6 +41,23 @@ async function getQuotes() {
         // Catch error here
     }
 }
+
+// Tweet Quote
+function tweetQuote() {
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${authorText.textContent}`;
+    // back ticks are different than single quotes
+    // because we're going to add a query parameter
+    window.open(twitterUrl), '_blank';
+    // this opens the twitter url to open in a new tab
+}
+
+
+// eventListeners go at the bottom typically
+newQuoteBtn.addEventListener('click', newQuote);
+// on click we want to load the newQuote function
+
+twitterBtn.addEventListener('click', tweetQuote);
+
 
 // On load
 getQuotes();
