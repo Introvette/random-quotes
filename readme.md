@@ -1,2 +1,2 @@
 # Just some practice :)
-### https://introvette.github.io/template-test/
+### [Demo](https://introvette.github.io/random-quotes/)
